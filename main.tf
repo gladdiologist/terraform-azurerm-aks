@@ -28,6 +28,7 @@ module "kubernetes" {
   enable_role_based_access_control = var.enable_role_based_access_control
   os_disk_size_gb                  = var.os_disk_size_gb
   vnet_subnet_id                   = var.vnet_subnet_id
+  cluster_name                     = var.cluster_name
 }
 
 module "log_analytics_workspace" {
