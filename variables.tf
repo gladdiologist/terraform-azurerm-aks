@@ -1,3 +1,16 @@
+variable "resource_group_name" {
+	description = "The name of the resource group"
+}
+
+variable "tags" {
+  description = "Tags of every resources created."
+  type        = "map"
+}
+
+variable "cluster_name" {
+	description = "The name of the cluster"
+}
+
 variable "prefix" {
   description = "The prefix for the resources created in the specified Azure Resource Group"
 }
@@ -48,5 +61,29 @@ variable "kubernetes_version" {
 variable "public_ssh_key" {
   description = "A custom ssh key to control access to the AKS cluster"
   default     = ""
+}
+
+variable "enable_http_application_routing" {
+  description = "Enable HTTP Application Routing Addon (forces recreation)"
+  default     = false
+}
+
+variable "enable_role_based_access_control" {
+  description = "Enable role based access control (forces recreation)"
+  default     = false
+}
+
+variable "os_disk_size_gb" {
+  description = "The Agent Operating System disk size in GB. Changing this forces a new resource to be created"
+  default = 30
+}
+
+variable "kubeconfig_path" {
+  description = "full path to save the kubeconfig in (e.g. /root/.kube/mycluster.yaml). make sure to add this file to KUBECONFIG (e.g. export KUBECONFIG=$KUBECONFIG:/root/.kube/mycluster.yaml) in order to add it to your list of clusters" 
+}
+
+variable "vnet_subnet_id" {
+  description = "The ID of the Subnet where the Agents in the Pool should be provisioned. Changing this forces a new resource to be created."
+  default = null
 }
 

@@ -1,7 +1,8 @@
 resource "azurerm_kubernetes_cluster" "main" {
-  name                = "${var.prefix}-aks"
+  name                = var.cluster_name
   location            = var.location
   resource_group_name = var.resource_group_name
+  node_resource_group = "${var.resource_group_name}.Resources"
   dns_prefix          = var.prefix
   kubernetes_version  = var.kubernetes_version
 
@@ -19,7 +20,8 @@ resource "azurerm_kubernetes_cluster" "main" {
     count           = var.agents_count
     vm_size         = var.agents_size
     os_type         = "Linux"
-    os_disk_size_gb = 50
+    os_disk_size_gb = var.os_disk_size_gb
+	vnet_subnet_id  = var.vnet_subnet_id
   }
 
   service_principal {
@@ -32,6 +34,14 @@ resource "azurerm_kubernetes_cluster" "main" {
       enabled                    = true
       log_analytics_workspace_id = var.log_analytics_workspace_id
     }
+  }
+  
+  http_application_routing {
+    enabled = "${var.enable_http_application_routing}"
+  }
+  
+  role_based_access_control {
+    enabled = "${var.enable_role_based_access_control}"
   }
 
   tags = var.tags

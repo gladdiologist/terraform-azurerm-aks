@@ -49,3 +49,27 @@ variable "service_principal_client_secret" {
   description = "The Client Secret of the Service Principal assigned to Kubernetes"
 }
 
+variable "enable_http_application_routing" {
+  description = "Enable HTTP Application Routing Addon (forces recreation)"
+  default     = false
+}
+
+variable "enable_role_based_access_control" {
+  description = "Enable role based access control (forces recreation)"
+  default     = false
+}
+
+variable "os_disk_size_gb" {
+  description = "The Agent Operating System disk size in GB. Changing this forces a new resource to be created"
+  default = 30
+}
+
+variable "kubeconfig_path" {
+  description = "full path to save the kubeconfig in (e.g. /root/.kube/mycluster.yaml). make sure to add this file to KUBECONFIG (e.g. export KUBECONFIG=$KUBECONFIG:/root/.kube/mycluster.yaml) in order to add it to your list of clusters" 
+}
+
+variable "vnet_subnet_id" {
+  description = "The ID of the Subnet where the Agents in the Pool should be provisioned. Changing this forces a new resource to be created."
+  default = null
+}
+
