@@ -29,6 +29,7 @@ module "kubernetes" {
   os_disk_size_gb                  = var.os_disk_size_gb
   vnet_subnet_id                   = var.vnet_subnet_id
   cluster_name                     = var.cluster_name
+  azure_active_directory           = var.azure_active_directory
 }
 
 module "log_analytics_workspace" {
