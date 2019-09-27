@@ -87,3 +87,14 @@ variable "vnet_subnet_id" {
   default = null
 }
 
+variable "azure_active_directory" {
+  default = null
+  type = object({
+    client_app_id       = string
+    server_app_id       = string
+    server_app_secret   = string
+    tenant_id           = string
+  }
+}
+
+
