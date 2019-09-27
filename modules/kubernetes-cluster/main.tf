@@ -42,6 +42,16 @@ resource "azurerm_kubernetes_cluster" "main" {
   
   role_based_access_control {
     enabled = "${var.enable_role_based_access_control}"
+    
+    dynamic "azure_active_directory" {
+      for_each = var.azure_active_directory == null ? [] : list(var.azure_active_directory)
+      content {
+        client_app_id = azure_active_directory.value.client_app_id
+	server_app_id = azure_active_directory.value.server_app_id 
+	server_app_secret = azure_active_directory.value.server_app_secret
+	tenant_id = azure_active_directory.value.tenant_id
+      }
+    }
   }
 
   tags = var.tags
