@@ -84,6 +84,6 @@ variable "azure_active_directory" {
     server_app_id       = string
     server_app_secret   = string
     tenant_id           = string
-  }
+  })
 }
 
