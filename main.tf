@@ -30,6 +30,7 @@ module "kubernetes" {
   vnet_subnet_id                   = var.vnet_subnet_id
   cluster_name                     = var.cluster_name
   azure_active_directory           = var.azure_active_directory
+  alternate_node_pool              = var.alternate_node_pool
 }
 
 module "log_analytics_workspace" {

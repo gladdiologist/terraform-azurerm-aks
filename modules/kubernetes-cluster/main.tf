@@ -24,6 +24,18 @@ resource "azurerm_kubernetes_cluster" "main" {
 	vnet_subnet_id  = var.vnet_subnet_id
   }
 
+  dynamic "agent_pool_profile" {
+    for_each = var.alternate_node_pool == null ? [] : list(var.alternate_node_pool)
+    content {
+      name           = alternate_node_pool.value.name
+      count          = alternate_node_pool.value.count
+      vm_size        = alternate_node_pool.value.vm_size
+      os_type        = alternate_node_pool.value.os_type
+      os_disk_size_gb= alternate_node_pool.value.os_disk_size_gb
+      vnet_subnet_id = alternate_node_pool.value.vnet_subnet_id
+    }
+  }
+
   service_principal {
     client_id     = var.service_principal_client_id
     client_secret = var.service_principal_client_secret
