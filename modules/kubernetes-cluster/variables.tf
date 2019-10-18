@@ -89,13 +89,13 @@ variable "azure_active_directory" {
 
 variable "alternate_node_pool" {
   default = null
-  type = object({
+  type = list(object({
     name = string
     count = number
     vm_size = string
     os_type = string
     os_disk_size_gb = number
     vnet_subnet_id = string
-  })
+  }))
 }
 
