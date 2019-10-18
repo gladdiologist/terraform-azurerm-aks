@@ -99,7 +99,7 @@ variable "azure_active_directory" {
 
 
 variable "alternate_node_pool" {
-  default = null
+  default = []
   type = list(object({
     name = string
     count = number

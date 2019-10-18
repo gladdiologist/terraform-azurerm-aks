@@ -25,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   dynamic "agent_pool_profile" {
-    for_each = var.alternate_node_pool == null ? [] : list(var.alternate_node_pool)
+    for_each = var.alternate_node_pool == null ? [] : var.alternate_node_pool
     content {
       name           = alternate_node_pool.value.name
       count          = alternate_node_pool.value.count
